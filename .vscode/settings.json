@@ -1,11 +1,18 @@
 {
-    "staticWebApps.appSubpath": "/",
-    "staticWebApps.apiSubpath": "",
-    "staticWebApps.outputSubpath": "",
+    "staticWebApps.appSubpath": "public",
+    "staticWebApps.apiSubpath": "api",
+    "staticWebApps.outputSubpath": "public",
     "azureFunctions.deploySubpath": "api",
     "azureFunctions.scmDoBuildDuringDeployment": true,
     "azureFunctions.pythonVenv": ".venv",
     "azureFunctions.projectLanguage": "Python",
     "azureFunctions.projectRuntime": "~3",
-    "debug.internalConsoleOptions": "neverOpen"
+    "debug.internalConsoleOptions": "neverOpen",
+    "liveServer.settings.multiRootWorkspaceName": "RMC",
+    "liveServer.settings.root": "/public",
+    "liveServer.settings.proxy": {
+        "enable": true,
+        "baseUri": "/api",
+        "proxyUri": "http://127.0.0.1:7071/api"
+    }
 }
