@@ -1,23 +1,24 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate My Connection</title>
 </head>
 
 <body>
-    <main>
-        <h1>Test</h1>
-    </main>
+  <h1>Test</h1>
+  <a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=863gl16an25sq9&redirect_uri=http%3A%2F%2F127.0.0.1:5500%2Fcallback%2F&scope=r_liteprofile%20r_emailaddress"
+    class="button">Log In</a>
+  <p id="resp">No function response</p>
 </body>
 <script>
-    (async function () {
-        let response = await fetch(`api/TestFunction`);
-        let message = await response.json();
-
-        document.querySelector("#message").innerHTML = message.text
-    })();
+  (async function () {
+    let response = await fetch(`api/TestFunction`);
+    let message = await response.text();
+    console.log(message);
+    document.querySelector("#resp").innerHTML = message
+  })();
 </script>
 
 </html>
