@@ -4,3 +4,4 @@ Action Items
 
 Advice for Static Web App Team
 * Function logs by default (create AppInsights and link)
+* Click function to view content
