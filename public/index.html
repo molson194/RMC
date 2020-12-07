@@ -21,12 +21,12 @@
   console.log(linkedInLoginUrl);
   document.querySelector("#login").href = linkedInLoginUrl;
 
-    (async function () {
-      let response = await fetch(`/api/TestFunction`);
-      let message = await response.text();
-      console.log(message);
-      document.querySelector("#resp").innerHTML = message
-    })();
+  (async function () {
+    let response = await fetch(`/api/TestFunction`);
+    let message = await response.text();
+    console.log(message);
+    document.querySelector("#resp").innerHTML = message
+  })();
 </script>
 
 </html>
