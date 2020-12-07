@@ -29,10 +29,9 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "public" # App source code path
           api_location: "api" # Api source code path - optional
-          output_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
       - name: Upload Functions Output
         uses: actions/upload-artifact@v2
         with:
           name: code-coverage-report
-          path: /bin/staticsites/ss-oryx/api
+          path: $GITHUB_WORKSPACE/api
