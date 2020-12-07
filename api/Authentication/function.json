@@ -10,7 +10,7 @@
         "get",
         "post"
       ],
-      "route": "Authentication/{token}"
+      "route": "Authentication"
     },
     {
       "type": "http",

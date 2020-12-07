@@ -5,7 +5,7 @@ const code = urlParams.get('code');
 const state = urlParams.get('state');
 
 (async function () {
-  let response = await fetch('/api/Authentication/' + code);
+  let response = await fetch('/api/Authentication?token=' + code);
   let message = await response.text();
   console.log(message);
 })();
