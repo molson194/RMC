@@ -4,7 +4,7 @@
     "staticWebApps.outputSubpath": "public",
     "azureFunctions.deploySubpath": "api",
     "azureFunctions.scmDoBuildDuringDeployment": true,
-    "azureFunctions.pythonVenv": ".venv",
+    "azureFunctions.pythonVenv": "pythonenv3.8",
     "azureFunctions.projectLanguage": "Python",
     "azureFunctions.projectRuntime": "~3",
     "debug.internalConsoleOptions": "neverOpen",
