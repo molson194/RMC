@@ -18,6 +18,17 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      #########################################################################
+      # REMOVE AFTER fixed https://github.com/Azure/static-web-apps/issues/238
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python -m pip install  --target=".python_packages/lib/site-packages"  -r requirements.txt
+        working-directory: api
+      #########################################################################
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
