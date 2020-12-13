@@ -1,6 +1,7 @@
 Action Items
-# Fix Authentication prod api
-# Create new function to (a) retrieve linked in token, (b) get email, uid, name, (c) create/update user with new JWT, (d) return token to user
+* Store JWT as cookie
+* Redirect to non-callback url
+* Three tabs: my reviews, give new review, given reviews
 
 Advice for Static Web App Team
 * Function logs by default (create AppInsights and link)
