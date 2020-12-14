@@ -21,10 +21,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
   r = requests.post("https://www.linkedin.com/oauth/v2/accessToken", headers=headers, data=payload)
   print(r.text)
   j = json.loads(r.text)
-  accessToken = j['access_token']
+  linkedInToken = j['access_token']
 
   # Get email for user
-  headers = {"Authorization": "Bearer " + accessToken}
+  headers = {"Authorization": "Bearer " + linkedInToken}
   r = requests.get("https://api.linkedin.com/v2/clientAwareMemberHandles?q=members&projection=(elements*(primary,type,handle~))", headers=headers)
   print(r.text)
   j = json.loads(r.text)
@@ -40,14 +40,18 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
   userId = j['id']
   print(firstName + " " + lastName + " " + userId)
 
-  # Create JWT with expiration
-  jwtToken = jwt.encode({
+  # Create access/refresh JWT with expiration (as string)
+  accessToken = jwt.encode({
       'userId': userId,
-      'exp': time() + 300
-    }, os.environ["JWT_ENCODING_SECRET"], algorithm='HS256')
-  print(jwtToken)
+      'exp': time() + 900
+    }, os.environ["JWT_ENCODING_SECRET"], algorithm='HS256').decode()
 
-  # Store/Update user (TODO: key to secrets)
+  refreshToken = jwt.encode({
+      'userId': userId,
+      'exp': time() + 5000000
+    }, os.environ["JWT_ENCODING_SECRET"], algorithm='HS256').decode()
+
+  # Store/Update user
   url = 'https://rmc-cosmosdb.documents.azure.com:443/'
   key = os.environ['COSMOS_ACCOUNT_KEY']
   client = CosmosClient(url, credential=key)
@@ -62,13 +66,18 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     'id' : userId,
     'firstName' : firstName,
     'lastName' : lastName,
-    'linkedInToken' : accessToken,
-    'email' : email
+    'linkedInToken' : linkedInToken,
+    'email' : email,
+    'refreshToken' : refreshToken
   }
   container.upsert_item(body=user)
 
   # Return JWT
   return func.HttpResponse(
-    jwtToken,
-    status_code=200
+    "Login Successful",
+    status_code=200,
+      headers={
+        'Set-Cookie': f"RefreshToken={refreshToken}; HttpOnly; Path=/; Max-Age=5000000; SameSite=Strict", # TODO: Secure;
+        'set-cookie': f"AccessToken={accessToken}; HttpOnly; Path=/; Max-Age=900; SameSite=Strict" # TODO: Secure;
+      }
   )
