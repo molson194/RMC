@@ -1,10 +1,24 @@
 Action Items
-* Redirect to non-callback url
-* Three tabs: my reviews, give new review, given reviews
-* On any request, validate the access token. 
+* Prep 3 tabs - My Feedback, Give Feedback, Past Feedback
+* Give Feedback
+  * UI - Rate 1..5 on 2 categories, 2 written responses
+  * POST givefeedback api - add object to db + allow empty
+  * Validate the access token
+  * Send receiver an email when new feedback arrives
+* MyFeedback
+  * Prep myfeedback UI
+  * GET myfeedback list api + Respond with hard-coded list + Populate UI
+  * Validate the access token
+  * Create myfeedback collection + query collection + serialize response
+  * GET aggregate myfeedback api (average stars for categories) 
+  * If valid access token on main page, provide 'Take me to my dashboard link'
+  * Handle isempty/notrated cases
+* PastFeedback
+* Validate the access token
   * If expired access token or does not exist, validate refresh token
   * If expired refresh token or does not exist, sign out the user
   * If valid refresh token, generate new access token and set cookie
+  * Make this a common library
 
 Advice for Static Web App Team
 * Function logs by default (create AppInsights and link)

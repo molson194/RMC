@@ -8,4 +8,8 @@ const state = urlParams.get('state');
   let response = await fetch('/api/Authentication?token=' + code);
   let message = await response.text();
   console.log(message);
+
+  if (message == "Login Successful") {
+    window.location.href = '/myfeedback/'
+  }
 })();
