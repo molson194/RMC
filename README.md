@@ -1,5 +1,4 @@
 Action Items
-* Prep 3 tabs - My Feedback, Give Feedback, Past Feedback
 * Give Feedback
   * UI - Rate 1..5 on 2 categories, 2 written responses
   * POST givefeedback api - add object to db + allow empty
@@ -14,6 +13,8 @@ Action Items
   * If valid access token on main page, provide 'Take me to my dashboard link'
   * Handle isempty/notrated cases
 * PastFeedback
+* Home page
+  * If validated access token, button take me to dashboard + user name instead of login
 * Validate the access token
   * If expired access token or does not exist, validate refresh token
   * If expired refresh token or does not exist, sign out the user
