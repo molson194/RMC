@@ -43,11 +43,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
   # Create access/refresh JWT with expiration (as string)
   accessToken = jwt.encode({
       'userId': userId,
-      'exp': time() + 900
-    }, os.environ["JWT_ENCODING_SECRET"], algorithm='HS256').decode()
-
-  refreshToken = jwt.encode({
-      'userId': userId,
       'exp': time() + 5000000
     }, os.environ["JWT_ENCODING_SECRET"], algorithm='HS256').decode()
 
@@ -67,8 +62,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     'firstName' : firstName,
     'lastName' : lastName,
     'linkedInToken' : linkedInToken,
-    'email' : email,
-    'refreshToken' : refreshToken
+    'email' : email
   }
   container.upsert_item(body=user)
 
@@ -77,7 +71,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     "Login Successful",
     status_code=200,
       headers={
-        'Set-Cookie': f"RefreshToken={refreshToken}; HttpOnly; Path=/; Max-Age=5000000; SameSite=Strict", # TODO: Secure;
-        'set-cookie': f"AccessToken={accessToken}; HttpOnly; Path=/; Max-Age=900; SameSite=Strict" # TODO: Secure;
+        'Set-Cookie': f"AccessToken={accessToken}; HttpOnly; Path=/; Max-Age=5000000; SameSite=Strict" # TODO: Secure;
       }
   )

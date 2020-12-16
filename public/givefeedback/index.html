@@ -6,6 +6,53 @@
   <title>Rate My Connection</title>
 </head>
 
+<script>
+  let submittedForm = false;
+</script>
+
 <body>
+  <label for="technical">Technical Skills:</label>
+  <select id="technical" name="Technical">
+    <option value="1">Weak</option>
+    <option value="2">Below Average</option>
+    <option value="3">Average</option>
+    <option value="4">Above Average</option>
+    <option value="5">Amazing</option>
+  </select>
+  <label for="leadership">Leadership Ability:</label>
+  <select id="leadership" name="Leadership">
+    <option value="1">Weak</option>
+    <option value="2">Below Average</option>
+    <option value="3">Average</option>
+    <option value="4">Above Average</option>
+    <option value="5">Amazing</option>
+  </select>
+  <label for="communication">Communication:</label>
+  <select id="communication" name="Communication">
+    <option value="1">Weak</option>
+    <option value="2">Below Average</option>
+    <option value="3">Average</option>
+    <option value="4">Above Average</option>
+    <option value="5">Amazing</option>
+  </select>
+  <button id="submit" onclick="submit()">Submit</button>
 </body>
+<script>
+  function submit(form) {
+    // TODO: Get id of user, allow empty fields
+    data = {
+      "Technical" : document.getElementById("technical").value,
+      "Leadership" : document.getElementById("leadership").value,
+      "Communication" : document.getElementById("communication").value,
+      "ToId" : "L97LR_0aWY" 
+    };
+    fetch('/api/GiveFeedback', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      credentials: "same-origin"
+    });
+    window.location.href = "/pastfeedback/"
+  }
+</script>
+
 </html>
